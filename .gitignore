@@ -1,0 +1,7 @@
+# Visual Studio – místní nastavení a výstupy sestavení
+.vs/
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+TestResults/
