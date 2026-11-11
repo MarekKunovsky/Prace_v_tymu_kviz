@@ -13,7 +13,8 @@ změny ostatních členů.
 
 Hlavní města světa. Hráč dostane název hlavního města
 a vybere ze čtyř možností stát, ke kterému město patří.
-Otázky budou postupně obtížnější.
+Před každým kolem si hráč vybere lehkou, střední nebo těžkou obtížnost.
+Program ze seznamu náhodně vybere pět různých otázek stejné obtížnosti.
 
 ## Plánované funkce
 
