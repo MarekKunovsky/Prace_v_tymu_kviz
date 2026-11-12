@@ -14,6 +14,12 @@ internal static class SpravaHracu
             return;
         }
 
+        if (hraci.Any(hrac => string.Equals(hrac.Jmeno, jmeno, StringComparison.OrdinalIgnoreCase)))
+        {
+            Console.WriteLine("Hráč s tímto jménem už existuje.");
+            return;
+        }
+
         hraci.Add(new Hrac(jmeno));
         Console.WriteLine($"Hráč \"{jmeno}\" byl zaregistrován.");
     }
