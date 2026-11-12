@@ -13,7 +13,7 @@ změny ostatních členů.
 
 - **MarekKunovsky** – správce repozitáře, hlavní menu a průběh hry (`Program.cs`, `Kviz.cs`).
 - **strestik** – otázky (`Otazka.cs`, `SpravaOtazek.cs`, `UkazkoveOtazky.cs`), navržená role správce úkolů.
-- **[DOPLŇ GITHUB JMÉNO TŘETÍHO ČLENA]** – hráči (`Hrac.cs`, `SpravaHracu.cs`), navržená role správce dokumentace a testů.
+- **Listik2009** – hráči (`Hrac.cs`, `SpravaHracu.cs`), navržená role správce dokumentace a testů.
 
 ## Téma kvízu
 
