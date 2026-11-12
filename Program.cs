@@ -4,17 +4,43 @@ using KvizProjekt;
 Console.InputEncoding = Encoding.UTF8;
 Console.OutputEncoding = Encoding.UTF8;
 
+Kviz kviz = new();
+SpravaOtazek.NactiUkazky(kviz.Otazky);
+SpravaHracu.NactiUkazky(kviz.Hraci);
+
 while (true)
 {
     VypisMenu();
     int? volba = Vstup.Cislo("Volba: ", 0, 7);
-    if (volba is null or 0)
-    {
-        Console.WriteLine("Konec kvízu.");
-        return;
-    }
 
-    Console.WriteLine("Tato volba se zatím připravuje.");
+    switch (volba)
+    {
+        case null:
+        case 0:
+            Console.WriteLine("Konec kvízu.");
+            return;
+        case 1:
+            SpravaOtazek.Pridat(kviz.Otazky);
+            break;
+        case 2:
+            SpravaOtazek.VypsatPodleKategorie(kviz.Otazky);
+            break;
+        case 3:
+            SpravaOtazek.Smazat(kviz.Otazky);
+            break;
+        case 4:
+            SpravaHracu.Registrovat(kviz.Hraci);
+            break;
+        case 5:
+            SpravaHracu.Vypsat(kviz.Hraci);
+            break;
+        case 6:
+            kviz.Hrat();
+            break;
+        case 7:
+            SpravaHracu.Zebricek(kviz.Hraci);
+            break;
+    }
 }
 
 static void VypisMenu()
