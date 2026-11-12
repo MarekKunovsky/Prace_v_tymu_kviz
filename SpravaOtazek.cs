@@ -14,6 +14,12 @@ internal static class SpravaOtazek
             return;
         }
 
+        if (otazky.Any(otazka => string.Equals(otazka.Text, mesto, StringComparison.OrdinalIgnoreCase)))
+        {
+            Console.WriteLine("Otázka na toto hlavní město už existuje.");
+            return;
+        }
+
         string? kategorie = Vstup.Text("Kategorie (např. Evropa): ");
         if (kategorie is null)
         {
@@ -26,22 +32,22 @@ internal static class SpravaOtazek
             return;
         }
 
-        string[] moznosti = new string[4];
-        for (int i = 0; i < moznosti.Length; i++)
+        List<string> moznosti = new();
+        while (moznosti.Count < 4)
         {
-            string? moznost = Vstup.Text($"Stát pro možnost {i + 1}: ");
+            string? moznost = Vstup.Text($"Stát pro možnost {moznosti.Count + 1}: ");
             if (moznost is null)
             {
                 return;
             }
 
-            moznosti[i] = moznost;
-        }
+            if (moznosti.Contains(moznost, StringComparer.OrdinalIgnoreCase))
+            {
+                Console.WriteLine("Tento stát už je mezi možnostmi. Zadej jiný.");
+                continue;
+            }
 
-        if (moznosti.Distinct(StringComparer.OrdinalIgnoreCase).Count() != moznosti.Length)
-        {
-            Console.WriteLine("Možnosti se musí lišit. Zkus otázku přidat znovu.");
-            return;
+            moznosti.Add(moznost);
         }
 
         int? spravna = Vstup.Cislo("Číslo správné odpovědi (1–4): ", 1, 4);
