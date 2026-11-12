@@ -36,7 +36,29 @@ public class Kviz
             return;
         }
 
-        Console.WriteLine($"Pro hráče {hrac.Jmeno} je připraveno {dostupneOtazky.Length} otázek vybrané obtížnosti.");
+        Random.Shared.Shuffle(dostupneOtazky);
+        Otazka[] vybraneOtazky = dostupneOtazky[..PocetOtazekVKole];
+        Console.WriteLine($"Kolo: {hrac.Jmeno} – {vybraneOtazky[0].NazevObtiznosti} obtížnost");
+
+        for (int i = 0; i < vybraneOtazky.Length; i++)
+        {
+            Otazka otazka = vybraneOtazky[i];
+            Console.WriteLine();
+            Console.WriteLine($"{i + 1}/{PocetOtazekVKole}. Kterému státu patří hlavní město {otazka.Text}?");
+            for (int j = 0; j < otazka.Moznosti.Count; j++)
+            {
+                Console.WriteLine($"{j + 1}. {otazka.Moznosti[j]}");
+            }
+
+            int? odpoved = Vstup.Cislo("Odpověď (1–4, 0 přerušit): ", 0, 4);
+            if (odpoved is null or 0)
+            {
+                Console.WriteLine("Kolo bylo přerušeno.");
+                return;
+            }
+        }
+
+        Console.WriteLine("Kolo dohráno.");
     }
 
     private Hrac? VyberHrace()
