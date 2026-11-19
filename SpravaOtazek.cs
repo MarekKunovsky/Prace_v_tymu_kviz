@@ -4,6 +4,7 @@ internal static class SpravaOtazek
 {
     internal static void NactiUkazky(List<Otazka> otazky)
     {
+        otazky.AddRange(UkazkoveOtazky.Vytvor());
     }
 
     internal static void Pridat(List<Otazka> otazky)
@@ -62,7 +63,38 @@ internal static class SpravaOtazek
 
     internal static void VypsatPodleKategorie(List<Otazka> otazky)
     {
-        Console.WriteLine("Tato volba se zatím připravuje.");
+        if (otazky.Count == 0)
+        {
+            Console.WriteLine("Seznam otázek je prázdný.");
+            return;
+        }
+
+        IEnumerable<string> kategorieVSeznamu = otazky.Select(otazka => otazka.Kategorie)
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .OrderBy(kategorie => kategorie, StringComparer.CurrentCultureIgnoreCase);
+        Console.WriteLine($"Dostupné kategorie: {string.Join(", ", kategorieVSeznamu)}");
+
+        string? kategorie = Vstup.Text("Kategorie pro výpis: ");
+        if (kategorie is null)
+        {
+            return;
+        }
+
+        Otazka[] nalezene = otazky
+            .Where(otazka => string.Equals(otazka.Kategorie, kategorie, StringComparison.OrdinalIgnoreCase))
+            .ToArray();
+
+        if (nalezene.Length == 0)
+        {
+            Console.WriteLine($"V kategorii \"{kategorie}\" nejsou žádné otázky.");
+            return;
+        }
+
+        Console.WriteLine($"Počet otázek v kategorii: {nalezene.Length}");
+        foreach (Otazka otazka in nalezene)
+        {
+            Console.WriteLine($"- {otazka.Text} ({otazka.NazevObtiznosti})");
+        }
     }
 
     internal static void Smazat(List<Otazka> otazky)
