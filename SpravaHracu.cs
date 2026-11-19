@@ -35,7 +35,8 @@ internal static class SpravaHracu
         Console.WriteLine("Hráči:");
         foreach (Hrac hrac in hraci)
         {
-            Console.WriteLine($"- {hrac.Jmeno}");
+            string rekord = hrac.PocetHer == 0 ? "zatím žádný" : $"{hrac.NejlepsiSkore}/5";
+            Console.WriteLine($"- {hrac.Jmeno} | hry: {hrac.PocetHer} | rekord: {rekord}");
         }
     }
 
