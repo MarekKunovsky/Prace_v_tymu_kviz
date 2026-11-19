@@ -4,6 +4,8 @@ internal static class SpravaHracu
 {
     internal static void NactiUkazky(List<Hrac> hraci)
     {
+        hraci.Add(new Hrac("Adam"));
+        hraci.Add(new Hrac("Eliška"));
     }
 
     internal static void Registrovat(List<Hrac> hraci)
@@ -26,7 +28,18 @@ internal static class SpravaHracu
 
     internal static void Vypsat(List<Hrac> hraci)
     {
-        Console.WriteLine("Tato volba se zatím připravuje.");
+        if (hraci.Count == 0)
+        {
+            Console.WriteLine("Zatím není zaregistrován žádný hráč.");
+            return;
+        }
+
+        Console.WriteLine("Hráči:");
+        foreach (Hrac hrac in hraci)
+        {
+            string rekord = hrac.PocetHer == 0 ? "zatím žádný" : $"{hrac.NejlepsiSkore}/5";
+            Console.WriteLine($"- {hrac.Jmeno} | hry: {hrac.PocetHer} | rekord: {rekord}");
+        }
     }
 
     internal static void Zebricek(List<Hrac> hraci)
