@@ -99,6 +99,35 @@ internal static class SpravaOtazek
 
     internal static void Smazat(List<Otazka> otazky)
     {
-        Console.WriteLine("Tato volba se zatím připravuje.");
+        if (otazky.Count == 0)
+        {
+            Console.WriteLine("Seznam otázek je prázdný.");
+            return;
+        }
+
+        Console.WriteLine("Otázky:");
+        for (int i = 0; i < otazky.Count; i++)
+        {
+            Otazka otazka = otazky[i];
+            Console.WriteLine($"{i + 1}. {otazka.Text} – {otazka.Kategorie}, {otazka.NazevObtiznosti}");
+        }
+
+        Console.WriteLine("0. Zrušit mazání");
+        int? cislo = Vstup.Cislo("Číslo otázky ke smazání: ", 0, otazky.Count);
+        if (cislo is null)
+        {
+            return;
+        }
+
+        if (cislo == 0)
+        {
+            Console.WriteLine("Mazání bylo zrušeno.");
+            return;
+        }
+
+        int index = cislo.Value - 1;
+        string mesto = otazky[index].Text;
+        otazky.RemoveAt(index);
+        Console.WriteLine($"Otázka \"{mesto}\" byla smazána.");
     }
 }
