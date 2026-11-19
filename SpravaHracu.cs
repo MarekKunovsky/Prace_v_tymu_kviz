@@ -26,7 +26,17 @@ internal static class SpravaHracu
 
     internal static void Vypsat(List<Hrac> hraci)
     {
-        Console.WriteLine("Tato volba se zatím připravuje.");
+        if (hraci.Count == 0)
+        {
+            Console.WriteLine("Zatím není zaregistrován žádný hráč.");
+            return;
+        }
+
+        Console.WriteLine("Hráči:");
+        foreach (Hrac hrac in hraci)
+        {
+            Console.WriteLine($"- {hrac.Jmeno}");
+        }
     }
 
     internal static void Zebricek(List<Hrac> hraci)
