@@ -1,7 +1,12 @@
+using System.Globalization;
+
 namespace KvizProjekt;
 
 internal static class SpravaHracu
 {
+    private static readonly StringComparer CeskeRazeni =
+        StringComparer.Create(CultureInfo.GetCultureInfo("cs-CZ"), ignoreCase: true);
+
     internal static void NactiUkazky(List<Hrac> hraci)
     {
         hraci.Add(new Hrac("Adam"));
@@ -46,6 +51,7 @@ internal static class SpravaHracu
     {
         Hrac[] poradi = hraci.Where(hrac => hrac.PocetHer > 0)
             .OrderByDescending(hrac => hrac.NejlepsiSkore)
+            .ThenBy(hrac => hrac.Jmeno, CeskeRazeni)
             .ToArray();
 
         if (poradi.Length == 0)
