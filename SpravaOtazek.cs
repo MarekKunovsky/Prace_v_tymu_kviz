@@ -112,9 +112,16 @@ internal static class SpravaOtazek
             Console.WriteLine($"{i + 1}. {otazka.Text} – {otazka.Kategorie}, {otazka.NazevObtiznosti}");
         }
 
-        int? cislo = Vstup.Cislo("Číslo otázky ke smazání: ", 1, otazky.Count);
+        Console.WriteLine("0. Zrušit mazání");
+        int? cislo = Vstup.Cislo("Číslo otázky ke smazání: ", 0, otazky.Count);
         if (cislo is null)
         {
+            return;
+        }
+
+        if (cislo == 0)
+        {
+            Console.WriteLine("Mazání bylo zrušeno.");
             return;
         }
 
