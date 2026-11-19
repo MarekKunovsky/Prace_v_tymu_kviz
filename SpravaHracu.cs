@@ -4,6 +4,8 @@ internal static class SpravaHracu
 {
     internal static void NactiUkazky(List<Hrac> hraci)
     {
+        hraci.Add(new Hrac("Adam"));
+        hraci.Add(new Hrac("Eliška"));
     }
 
     internal static void Registrovat(List<Hrac> hraci)
